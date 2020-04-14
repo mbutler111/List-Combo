@@ -1,0 +1,39 @@
+''' all combinations list '''
+
+def expo(base, expon):
+    if(expon == 0):
+        return 1
+    
+    holder = base
+    for i in range(0,expon-1):
+        holder = holder * base
+    return holder
+
+def makeCombo(arr, size, totalElms):
+    if len(arr) == 0:
+        for i in range(0, expo(totalElms, size)):
+            arr.append([])
+        
+    current = 1
+    begin = 1
+    end = expo(totalElms,len(arr[0]))
+    for i in range(0, expo(totalElms, size)):
+        arr[i].append(current)
+        if begin == end:
+            begin = 1
+            if current == totalElms:
+                current = 1
+            else:
+                current += 1
+        else:
+            begin += 1
+            
+    if len(arr[0]) == size:
+        return
+    else:
+        makeCombo(arr, size, totalElms)
+            
+arr = []
+makeCombo(arr, 3, 4)
+for i in arr:
+    print(i)
